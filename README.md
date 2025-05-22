@@ -12,7 +12,7 @@ This project is part of the Machine Learning Techniques I course and focuses on 
 ## Best Performing Model
 After extensive experimentation with various architectures, the following LSTM model demonstrated the best performance in terms of RMSE while maintaining generalization:
 ### **Architecture**:
-**1. LSTM Layers:**
+1. **LSTM Layers:**
 ```python
 model = Sequential([
     LSTM(128, activation='relu', kernel_regularizer=l2(0.01), input_shape=(n_steps, n_features)),
@@ -23,13 +23,13 @@ model = Sequential([
     Dense(1)
 ])
 ```
-**2. Dense Layers:**
+2. **Dense Layers:**
 ```
 - Fully connected layer with 32 units, ReLU activation, and L2 regularization.
 - Output layer with 1 unit for PM2.5 prediction.
 ```
 
-### **Training Configuration **
+### **Training Configuration**
 Optimizer: Adam (learning rate = 0.01).
 
 Loss Function: Mean Squared Error (MSE).
@@ -65,16 +65,11 @@ pip install -r requirements.txt  # Includes TensorFlow, Pandas, NumPy, etc.
 Format predictions as per sample_submission.csv and submit to the Kaggle competition
 
 ## **Key Findings**
-i. **Data Preprocessing:** Handling missing values and normalizing features significantly improved model performance.
-
-ii. **Model Selection:** LSTMs outperformed vanilla RNNs due to their ability to capture long-term dependencies.
-
-iii. **Regularization:** Dropout and L2 regularization mitigated overfitting.
+1. **Data Preprocessing:** Handling missing values and normalizing features significantly improved model performance.
+2. **Model Selection:** LSTMs outperformed vanilla RNNs due to their ability to capture long-term dependencies.
+3. **Regularization:** Dropout and L2 regularization mitigated overfitting.
   
 ## **Contributors**
-Name: Geu Aguto Garang Bior
-GitHub: Geu-Pro2023
-Open to collaborations! Fork the repository and submit pull requests.
-
+**Name:** Geu Aguto Garang Bior **GitHub:** Geu-Pro2023
 ## **License**
 This project is licensed under the MIT License. See LICENSE for details.
