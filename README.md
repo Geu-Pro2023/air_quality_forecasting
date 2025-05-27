@@ -1,6 +1,6 @@
 # Beijing Air Quality Forecasting with LSTM
 
-## 📌 Table of Contents
+## Table of Contents
 - [Project Overview](#-project-overview)
 - [Key Features](#-key-features)
 - [Repository Structure](#-repository-structure)
@@ -14,7 +14,7 @@
 - [License](#-license)
 - [References](#-references)
 
-## 🌟 Project Overview
+## Project Overview
 
 This project predicts PM2.5 air pollution levels in Beijing using LSTM neural networks. It achieved **top 10% performance** in the Kaggle competition with:
 
