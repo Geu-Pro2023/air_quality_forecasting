@@ -1,7 +1,5 @@
 # Beijing Air Quality Forecasting with LSTM
 
-![PM2.5 Prediction Visualization](https://github.com/Geu-Pro2023/air_quality_forecasting/blob/main/images/prediction_visualization.png?raw=true)
-
 ## 📌 Table of Contents
 - [Project Overview](#-project-overview)
 - [Key Features](#-key-features)
