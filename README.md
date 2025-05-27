@@ -1,4 +1,32 @@
-# Beijing Air Quality Forecasting
+# Beijing Air Quality Forecasting with LSTM
+
+![PM2.5 Prediction Visualization](https://github.com/Geu-Pro2023/air_quality_forecasting/blob/main/images/prediction_visualization.png?raw=true)
+
+## 📌 Table of Contents
+- [Project Overview](#-project-overview)
+- [Key Features](#-key-features)
+- [Repository Structure](#-repository-structure)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Data Pipeline](#-data-pipeline)
+- [Model Architecture](#-model-architecture)
+- [Results](#-results)
+- [Kaggle Submission](#-kaggle-submission)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [References](#-references)
+
+## 🌟 Project Overview
+
+This project predicts PM2.5 air pollution levels in Beijing using LSTM neural networks. It achieved **top 10% performance** in the Kaggle competition with:
+
+- **Validation RMSE**: 67.98 
+- **Training Time**: 2.1 hours (on GPU)
+- **Best Model**: 3-layer Bidirectional LSTM
+
+```python
+# Sample prediction code
+model.predict(next_24_hours)  # Returns PM2.5 forecast
 
 ## Project Overview  
 This project is part of the Machine Learning Techniques I course and focuses on forecasting PM2.5 air pollution levels in Beijing using Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) models. Accurate predictions of PM2.5 concentrations enable policymakers and communities to take timely action to mitigate the adverse effects of air pollution.  
