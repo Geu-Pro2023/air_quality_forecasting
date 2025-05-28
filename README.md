@@ -42,6 +42,12 @@ Air-quality-forecasting
 │── /notebooks
 │└── air_quality_forecasting_starter_code.ipynb
 │└── Beijing_Air_Quality_Forecasting.ipynb
+│── /outputs
+│└──submission2.csv
+│└──submission3.csv
+│└──submission-csv
+│── /report
+│└──Air_Quality_Forecasting_Report.pdf
 │── README.md
 │── submission.csv
 
