@@ -6,12 +6,10 @@
 - [Dataset](#-key-Dataset)
 - [Repository Structure](#-repository-structure)
 - [Setup Instructions](#-setup-instructions)
-- [Usage](#-usage)
+- [Usage Instructions](#-usage-instructions)
 - [Data Pipeline](#-data-pipeline)
 - [Model Architecture](#-model-architecture)
-- [Results](#-results)
-- [Kaggle Submission](#-kaggle-submission)
-- [Contributing](#-contributing)
+- [Contributors](#-contributors)
 - [License](#-license)
 - [References](#-references)
 
@@ -68,27 +66,26 @@ Format predictions as per sample_submission.csv and submit to the Kaggle competi
 ## **Usage Instructions**
 ### **Running the Pipeline**
 1. **Data preprocessing:**
-```python
+```
 from src.data_processing import clean_dataset
 df = clean_dataset('data/raw/train.csv')
-```python
+```
 
 2. **Feature engineering:**
-```python
+```
 from src.features import create_features
 df = create_features(df)
-```python
+```
 
 3. **Model training:**
-```python
+```
 from src.models import LSTMForecaster
 model = LSTMForecaster()
 model.train(X_train, y_train)
-```python
 ```
 
 ## **Model Architecture**
-```python
+```
 # Example model definition
 model = Sequential([
     Bidirectional(LSTM(128, return_sequences=True), 
@@ -99,7 +96,6 @@ model = Sequential([
     Dense(32, activation='relu'),
     Dense(1)
 ])
-```python
 ```
 
 ## **Key Findings**
@@ -114,7 +110,11 @@ model = Sequential([
 - **Build an ensemble of different model architectures**
   
 ## **Contributors**
-**Name:** Geu Aguto Garang Bior **GitHub:** Geu-Pro2023
+1. **Name:** Geu Aguto 
+2. **GitHub:** https://github.com/Geu-Pro2023/air_quality_forecasting
+
+## **License**
+This project is licensed under the MIT License. See LICENSE for details.
 
 ## **References**
 1. Kaggle Inc., "Assignment 1 - Time Series Forecasting May 2025," Kaggle Competition, 2025.
@@ -122,5 +122,3 @@ model = Sequential([
 3. Beijing Municipal Ecological Environment Bureau, "Beijing Air Quality Report 2010-2013," 2014.
 4. World Health Organization, "WHO Global Air Quality Guidelines," 2021.
 
-## **License**
-This project is licensed under the MIT License. See LICENSE for details.
