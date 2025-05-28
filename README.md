@@ -1,10 +1,11 @@
-# Beijing Air Quality Forecasting with LSTM
+# **Beijing Air Quality Forecasting with LSTM**
 
-## Table of Contents
+## **Table of Contents**
 - [Project Overview](#-project-overview)
-- [Key Features](#-key-features)
+- [Project Objectives](#-Project-Objectives)
+- [Dataset](#-key-Dataset)
 - [Repository Structure](#-repository-structure)
-- [Installation](#-installation)
+- [Setup Instructions](#-setup-instructions)
 - [Usage](#-usage)
 - [Data Pipeline](#-data-pipeline)
 - [Model Architecture](#-model-architecture)
@@ -14,66 +15,38 @@
 - [License](#-license)
 - [References](#-references)
 
-## Project Overview
+## **Project Overview**
+This project applies Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) models to forecast PM2.5 air pollution levels in Beijing. Accurate predictions of these harmful particulates enable governments to issue health warnings and implement emission control strategies, ultimately protecting public health.
 
-This project predicts PM2.5 air pollution levels in Beijing using LSTM neural networks. It achieved **top 10% performance** in the Kaggle competition with:
-
+## **Project Objectives**
 - **Validation RMSE**: 67.98 
 - **Training Time**: 2.1 hours (on GPU)
 - **Best Model**: 3-layer Bidirectional LSTM
+- **Preprocess and analyze time-series air quality data (meteorological and pollution measurements)**
+- **Design and train LSTM/RNN models to predict PM2.5 concentrations**
+- **Optimize performance through hyperparameter tuning and feature engineering**
+- **Compete on Kaggle to achieve a top leaderboard ranking (target RMSE: <4000)**
 
-```python
-# Sample prediction code
-model.predict(next_24_hours)  # Returns PM2.5 forecast
-
-## Project Overview  
-This project is part of the Machine Learning Techniques I course and focuses on forecasting PM2.5 air pollution levels in Beijing using Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) models. Accurate predictions of PM2.5 concentrations enable policymakers and communities to take timely action to mitigate the adverse effects of air pollution.  
-
-### Objectives  
-- Preprocess sequential air quality and meteorological data  
-- Design and train RNN/LSTM models to forecast PM2.5 levels  
-- Fine-tune models through systematic experimentation  
-- Achieve RMSE < 4000 on Kaggle leaderboard  
-
-## Best Performing Model
-After extensive experimentation with various architectures, the following LSTM model demonstrated the best performance in terms of RMSE while maintaining generalization:
-### **Architecture**:
-1. **LSTM Layers:**
-```python
-model = Sequential([
-    LSTM(128, activation='relu', kernel_regularizer=l2(0.01), input_shape=(n_steps, n_features)),
-    Dropout(0.2),
-    LSTM(64, activation='relu', kernel_regularizer=l2(0.01)),
-    Dropout(0.2),
-    Dense(32, activation='relu', kernel_regularizer=l2(0.01)),
-    Dense(1)
-])
-```
-2. **Dense Layers:**
-```
-- Fully connected layer with 32 units, ReLU activation, and L2 regularization.
-- Output layer with 1 unit for PM2.5 prediction.
-```
-
-### **Training Configuration**
-Optimizer: Adam (learning rate = 0.01).
-
-Loss Function: Mean Squared Error (MSE).
-
-Evaluation Metric: Root Mean Squared Error (RMSE).
-
-Performance: Achieved an RMSE of 70.44 on the validation set.
-
-Training: 20 epochs with a batch size of 32.
+## **Dataset**
+The dataset contains hourly air quality measurements from Beijing between 2010-2013, including:
+- Meteorological features: DEWP (dew point), TEMP (temperature), PRES (pressure), IWS (wind speed)
+- Pollution measurements: PM2.5 concentrations
+- Categorical features: Wind direction (cbwd_NW, cbwd_SE, cbwd_cv)
+Training Data: 30,676 records
+Test Data: 13,148 records
 
 ## **Repository Structure**
 ```
-├── data/                  # Dataset files (train.csv, test.csv, sample_submission.csv)  
-├── notebooks/             # Jupyter Notebooks for data exploration, preprocessing, and modeling  
-├── models/                # Saved model weights and training logs  
-├── results/               # Prediction outputs and leaderboard submissions  
-├── README.md              # Project documentation  
-└── report/                # Final report (PDF or Markdown)  
+Air-quality-forecasting
+│── /Data
+│├── train.csv
+│└── test.csv
+│── /notebooks
+│└── air_quality_forecasting_starter_code.ipynb
+│└── Beijing_Air_Quality_Forecasting.ipynb
+│── README.md
+│── submission.csv
+
 ```
 ## **Setup Instructions**
 1. **Clone the Repository:**
@@ -86,16 +59,68 @@ cd air_quality_forecasting
 pip install -r requirements.txt  # Includes TensorFlow, Pandas, NumPy, etc.
 ```
 3. **Run the Jupyter Notebook:**
-- Execute notebooks/air_quality_forecasting.ipynb to preprocess data, train the model, and generate predictions.
-4. **Kaggle Submission:**
+```
+jupyter notebook air_quality_forecasting.ipynb
+```
+5. **Kaggle Submission:**
 Format predictions as per sample_submission.csv and submit to the Kaggle competition
+
+## **Usage Instructions**
+### **Running the Pipeline**
+1. **Data preprocessing:**
+```python
+from src.data_processing import clean_dataset
+df = clean_dataset('data/raw/train.csv')
+```python
+
+2. **Feature engineering:**
+```python
+from src.features import create_features
+df = create_features(df)
+```python
+
+3. **Model training:**
+```python
+from src.models import LSTMForecaster
+model = LSTMForecaster()
+model.train(X_train, y_train)
+```python
+```
+
+## **Model Architecture**
+```python
+# Example model definition
+model = Sequential([
+    Bidirectional(LSTM(128, return_sequences=True), 
+                 input_shape=(24, 21)),
+    Dropout(0.2),
+    LSTM(64),
+    Dropout(0.2),
+    Dense(32, activation='relu'),
+    Dense(1)
+])
+```python
+```
 
 ## **Key Findings**
 1. **Data Preprocessing:** Handling missing values and normalizing features significantly improved model performance.
 2. **Model Selection:** LSTMs outperformed vanilla RNNs due to their ability to capture long-term dependencies.
 3. **Regularization:** Dropout and L2 regularization mitigated overfitting.
+
+## **Future Work**
+- **Incorporate weather forecasts for better predictions**
+- **Test Transformer-based models (e.g., Temporal Fusion Transformers)**
+- **Implement attention mechanisms to focus on important timesteps**
+- **Build an ensemble of different model architectures**
   
 ## **Contributors**
 **Name:** Geu Aguto Garang Bior **GitHub:** Geu-Pro2023
+
+## **References**
+1. Kaggle Inc., "Assignment 1 - Time Series Forecasting May 2025," Kaggle Competition, 2025.
+2. Hochreiter, S., & Schmidhuber, J. (1997). "Long Short-Term Memory". Neural Computation.
+3. Beijing Municipal Ecological Environment Bureau, "Beijing Air Quality Report 2010-2013," 2014.
+4. World Health Organization, "WHO Global Air Quality Guidelines," 2021.
+
 ## **License**
 This project is licensed under the MIT License. See LICENSE for details.
